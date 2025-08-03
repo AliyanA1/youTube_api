@@ -1,0 +1,5 @@
+#ignoring node moudules
+/node_modules
+
+#ignoring env files
+.env.*.local
