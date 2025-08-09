@@ -43,7 +43,6 @@ const videoSchema=mongoose.Schema({
     },
     category:{
         type: String,
-        enum: ['entertainment', 'sports','news', "games","other"],
         trim: true,
     },
     tags:{
