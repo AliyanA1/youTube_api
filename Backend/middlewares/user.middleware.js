@@ -13,14 +13,8 @@ export const userMiddleware = (req, res, next) => {
 
   try {
     const userData = jwt.verify(token, JWT_SECRET);
-    if(req.params.id){
-      if(userData.id !== req.params.id){
-        return res.status(401).json({
-      status: "failed",
-      message: "not authenticated"
-    });
-    }
-    }
+     
+   
     
     req.user = userData;
    

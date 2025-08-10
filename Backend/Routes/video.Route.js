@@ -1,5 +1,5 @@
 import express from "express";
-import { getAllVideos, uploadVideo } from "../Controllers/video.controller.js";
+import { deletVideo, getAllVideos, updateVideo, uploadVideo, userVideos } from "../Controllers/video.controller.js";
 import { userMiddleware } from "../middlewares/user.middleware.js";
 
 const videoRoute=express.Router();
@@ -9,11 +9,11 @@ videoRoute.post('/upload-video',uploadVideo);
 
 videoRoute.get('/get-videos',getAllVideos);
 
-videoRoute.get('/get-video/:id',(req,res)=> res.send('route for getting a single video'));
+videoRoute.get('/get-videos/:id',userVideos);
 
-videoRoute.put('/update-video/:id',(req,res)=> res.send('route for updating a video'));
+videoRoute.put('/update-video/:id',updateVideo);
 
-videoRoute.delete('/delete-video/:id',(req,res)=> res.send('route for deleting a video'));
+videoRoute.delete('/delete-video/:id',deletVideo);
 
 
 
