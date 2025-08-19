@@ -37,10 +37,10 @@ const videoSchema=mongoose.Schema({
         type: Number,
         default: 0
     },
-    comments:{
-        type: Array,
-        default: []
-    },
+    comments:[
+        { type: mongoose.Schema.Types.ObjectId, ref: "comments" }
+    
+    ],
     category:{
         type: String,
         trim: true,
