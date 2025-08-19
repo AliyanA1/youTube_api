@@ -33,7 +33,7 @@ export const uploadVideo=async(req ,res)=>{
 
 export const getAllVideos=async(req ,res)=>{
     try {
-        const allVideos=await videoModel.find();
+        const allVideos=await videoModel.find().populate("comments", "comment");
 
         if(!allVideos){
             return  res.status(400).json({
