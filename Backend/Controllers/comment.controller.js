@@ -45,3 +45,84 @@ export const postComment=async(req ,res)=>{
         })
     }
 }
+
+//comments on videot
+export const videoComments=async(req ,res)=>{
+    try {
+        const {videoId}=req.params;
+
+        const find=await videoModel.findOne({_id: videoId}).populate("comments", "comment");
+         if(!find){
+            return  res.status(400).json({
+            status: "Error video not exist",
+        })
+       }
+
+        res.status(201).json({
+            status: "success",
+            message: "here is all on the comments on the video",
+            data: find
+        })
+
+    } catch (error) {
+        res.status(400).json({
+            status: "faild",
+            error: error.message
+        })
+    }
+}
+
+//delete comment
+export const deleteComment=async(req ,res)=>{
+    try {
+        const {commentId}=req.params;
+         const userId=req.user.id;
+
+        const find=await commentModle.findByIdAndDelete({_id: commentId, userId});
+         if(!find){
+            return  res.status(400).json({
+            status: "Error video not exist",
+        })
+       }
+
+        res.status(201).json({
+            message: "success comment deleted successfuly", 
+            data: find
+        })
+
+    } catch (error) {
+        res.status(400).json({
+            status: "faild in deleting comment",
+            error: error.message
+        })
+    }
+}
+
+//edit comment
+export const editComment=async(req ,res)=>{
+    try {
+        const {comment}=req.body;
+        const {commentId}=req.params;
+         const userId=req.user.id;
+
+        const edit=await commentModle.findByIdAndUpdate({_id: commentId, userId}, {comment}, {new: true});
+         if(!edit){
+            return  res.status(400).json({
+            status: "Error video not exist",
+        })
+       }
+
+        const find=await videoModel.findOne({_id: edit.videoId}).populate("comments", "comment");
+
+        res.status(201).json({
+            message: "comment edit & update successfuly", 
+            video: find
+        })
+
+    } catch (error) {
+        res.status(400).json({
+            status: "faild in editing comment",
+            error: error.message
+        })
+    }
+}
