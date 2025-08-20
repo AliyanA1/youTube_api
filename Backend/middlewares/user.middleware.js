@@ -14,13 +14,10 @@ export const userMiddleware = (req, res, next) => {
   try {
     const userData = jwt.verify(token, JWT_SECRET);
      
-   
-    
     req.user = userData;
    
-   
-   
     next();
+    
   } catch (err) {
     return res.status(401).json({
       status: "failed",
