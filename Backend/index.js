@@ -18,7 +18,7 @@ app.use(cookieParser())
 
 //Routes
 app.get("/",(req,res)=>{
-    res.send("hey from server")
+    res.send("hey this is youtube api")
 });
 app.use('/api/user',userRoute);
 app.use('/api/videos', videoRoute);
